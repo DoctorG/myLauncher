@@ -1,3 +1,11 @@
+myLauncher 2.1.0 (04/06/11)  DoctorG
+* Added Ability to Add Custom Badges to Items in the LauncherView (Courtesy Sascha Marc Paulus www.spaulus.com)
+* Added Ability to Change the Title of an Item in the LauncherView
+* Added Ability to Change the Icon Image of an Item in the LauncherView
+* Added Method for updating the above items:  -(void)updateItemWithTitle:(NSString *)currentTitle itemTypeToChange:(ItemType)_itemTypeToChange newItem:(NSString *)newItem;
+* Changed Title position to be fixed at the bottom, not adjusting for slightly different sized icons
+* Adjusted item height/padding for iPad to allow correct placement of badges & item titles.
+
 myLauncher 2.0.5 (20/05/11)
 ===========================
 * Bug fix for icon stability when scrolling
