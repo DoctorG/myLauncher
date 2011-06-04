@@ -59,10 +59,46 @@
     [self setAppControllers:[[[NSMutableDictionary alloc] init] autorelease]];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [self.launcherView viewDidAppear:animated];
+
+#pragma mark -
+#pragma mark DEMO MODE:
+
+-(void)demoUpdateItem {
+    [self performSelector:@selector(updateIcon) withObject:nil afterDelay:1.5];
+    [self performSelector:@selector(updateTitle) withObject:nil afterDelay:3];
+    [self performSelector:@selector(updateBadge) withObject:nil afterDelay:4];
+    [self performSelector:@selector(updateBadge2) withObject:nil afterDelay:6];
 }
 
+-(void)updateIcon {
+    if ([[UIDevice currentDevice].model hasPrefix:@"iPad"]) 
+        [self updateItemWithTitle:@"Item 3" itemTypeToChange:ItemTypeIcon newItem:@"itemImage-iPadNew.png"];
+    else
+        [self updateItemWithTitle:@"Item 3" itemTypeToChange:ItemTypeIcon newItem:@"itemImageNew.png"];
+}
+
+-(void)updateTitle {
+    [self updateItemWithTitle:@"Item 3" itemTypeToChange:ItemTypeTitle newItem:@"NEW ITEM 3!!"];
+}
+
+-(void)updateBadge {
+    [self updateItemWithTitle:@"Item 4" itemTypeToChange:ItemTypeBadge newItem:@"1"];
+}
+
+-(void)updateBadge2 {
+    [self updateItemWithTitle:@"Item 4" itemTypeToChange:ItemTypeBadge newItem:@"222"];
+}
+
+#pragma mark -
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.launcherView viewDidAppear:animated];
+    
+    //DEMO MODE
+    //delete the following line and the 5 methods above viewDidAppear from your final release 
+    [self demoUpdateItem];
+    
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {	
 	if(self.launcherNavigationController)
@@ -157,6 +193,34 @@
 					 completion:nil];
 }
 
+-(void)updateItemWithTitle:(NSString *)currentTitle itemTypeToChange:(ItemType)_itemTypeToChange newItem:(NSString *)newItem {
+    NSMutableArray *currentPages = [[NSMutableArray alloc] initWithArray:[self.launcherView pages]];
+    for (NSMutableArray *currentPage in currentPages) {
+        for (MyLauncherItem *item in currentPage) {
+            if ([item.title isEqualToString:currentTitle]) {
+                switch (_itemTypeToChange) {
+                    case ItemTypeBadge:
+                        item.badge = newItem;
+                        break;
+                    case ItemTypeTitle:
+                        item.title = newItem;
+                        break;
+                    case ItemTypeIcon:    
+                        if ([[UIDevice currentDevice].model hasPrefix:@"iPad"]) {
+                            item.iPadImage = newItem;
+                        } else {
+                            item.image = newItem;
+                        }
+                        break;
+                }
+                [item layoutItem];
+                //change only first matching item...
+                return;
+            }
+        }
+    }
+}
+
 -(void)launcherViewDidBeginEditing:(id)sender {
 	[self.navigationItem setRightBarButtonItem:[[[UIBarButtonItem alloc] 
 												 initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -224,13 +288,23 @@
 			{
                 NSNumber *version;
                 if ((version = [item objectForKey:@"myLauncherViewItemVersion"])) {
-                    if ([version intValue] == 2) {
+                    if ([version intValue] == 3) {
                         [savedPage addObject:[[[MyLauncherItem alloc] 
                                                initWithTitle:[item objectForKey:@"title"]
                                                iPhoneImage:[item objectForKey:@"image"]
                                                iPadImage:[item objectForKey:@"iPadImage"]
                                                target:[item objectForKey:@"controller"] 
                                                targetTitle:[item objectForKey:@"controllerTitle"]
+                                               badge:[item objectForKey:@"badge"]
+                                               deletable:[[item objectForKey:@"deletable"] boolValue]] autorelease]];
+                    } else if ([version intValue] == 2) {
+                        [savedPage addObject:[[[MyLauncherItem alloc] 
+                                               initWithTitle:[item objectForKey:@"title"]
+                                               iPhoneImage:[item objectForKey:@"image"]
+                                               iPadImage:[item objectForKey:@"iPadImage"]
+                                               target:[item objectForKey:@"controller"] 
+                                               targetTitle:[item objectForKey:@"controllerTitle"]
+                                               badge:nil
                                                deletable:[[item objectForKey:@"deletable"] boolValue]] autorelease]];
                     }
                 } else {
@@ -245,7 +319,7 @@
 			[savedLauncherItems addObject:savedPage];
 			[savedPage release];
 		}
-		
+        
 		return [savedLauncherItems autorelease];
 	}
     

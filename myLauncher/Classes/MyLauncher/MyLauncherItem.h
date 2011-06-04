@@ -19,26 +19,37 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomBadge.h"
 
 @protocol MyLauncherItemDelegate <NSObject>
 -(void)didDeleteItem:(id)item;
 @end
 
 @interface MyLauncherItem : UIControl {	
+    id <MyLauncherItemDelegate> delegate;
+	Class targetController;
+	NSString *title;
+	NSString *image;
+	NSString *controllerStr;
+    NSString *badge;
+	UIButton *closeButton;
+
 	BOOL dragging;
 	BOOL deletable;
 }
 
 @property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) Class targetController;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *image;
+@property (nonatomic, retain) NSString *badge;
 @property (nonatomic, retain) NSString *iPadImage;
 @property (nonatomic, retain) NSString *controllerStr;
 @property (nonatomic, retain) NSString *controllerTitle;
 @property (nonatomic, retain) UIButton *closeButton;
 
--(id)initWithTitle:(NSString *)title image:(NSString *)image target:(NSString *)targetControllerStr deletable:(BOOL)_deletable;
--(id)initWithTitle:(NSString *)title iPhoneImage:(NSString *)image iPadImage:(NSString *)iPadImage target:(NSString *)targetControllerStr targetTitle:(NSString *)targetTitle deletable:(BOOL)_deletable;
+-(id)initWithTitle:(NSString *)_title image:(NSString *)_image target:(NSString *)_targetControllerStr deletable:(BOOL)_deletable;
+-(id)initWithTitle:(NSString *)_title iPhoneImage:(NSString *)_image iPadImage:(NSString *)_iPadImage target:(NSString *)_targetControllerStr targetTitle:(NSString *)_targetTitle badge:(NSString *)_badge deletable:(BOOL)_deletable;
 -(void)layoutItem;
 -(void)setDragging:(BOOL)flag;
 -(BOOL)dragging;

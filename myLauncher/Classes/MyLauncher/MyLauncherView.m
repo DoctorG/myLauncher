@@ -33,7 +33,7 @@ static const int maxPageCount = 6;
 static const int maxItemsPageCount = 9;
 
 static const int portraitItemWidth = 106;
-static const int portraitItemHeight = 106;
+static const int portraitItemHeight = 126;
 static const int portraitColumnCount = 3;
 static const int portraitRowCount = 3;
 static const CGFloat portraitItemXStart = 0;
@@ -42,7 +42,7 @@ static const CGFloat portraitXPadding = 0;
 static const CGFloat portraitYPadding = 0;
 
 static const int landscapeItemWidth = 96;
-static const int landscapeItemHeight = 96;
+static const int landscapeItemHeight = 114;
 static const int landscapeColumnCount = 5;
 static const int landscapeRowCount = 2;
 static const CGFloat landscapeItemXStart = 0;
@@ -54,22 +54,22 @@ static const CGFloat landscapeYPadding = 0;
 static const int iPadMaxItemsPageCount = 20;
 
 static const int iPadPortraitItemWidth = 122;
-static const int iPadPortraitItemHeight = 122;
+static const int iPadPortraitItemHeight = 140;
 static const int iPadPortraitColumnCount = 4;
 static const int iPadPortraitRowCount = 5;
-static const CGFloat iPadPortraitItemXStart = 58;
+static const CGFloat iPadPortraitItemXStart = 53;
 static const CGFloat iPadPortraitItemYStart = 30;
 static const CGFloat iPadPortraitXPadding = 50;
-static const CGFloat iPadPortraitYPadding = 50;
+static const CGFloat iPadPortraitYPadding = 34;
 
 static const int iPadLandscapeItemWidth = 112;
-static const int iPadLandscapeItemHeight = 112;
+static const int iPadLandscapeItemHeight = 140;
 static const int iPadLandscapeColumnCount = 5;
 static const int iPadLandscapeRowCount = 4;
 static const CGFloat iPadLandscapeItemXStart = 58;
-static const CGFloat iPadLandscapeItemYStart = 30;
+static const CGFloat iPadLandscapeItemYStart = 2;
 static const CGFloat iPadLandscapeXPadding = 80;
-static const CGFloat iPadLandscapeYPadding = 30;
+static const CGFloat iPadLandscapeYPadding = 12;
 
 @interface MyLauncherView ()
 -(void)setupCurrentViewLayoutSettings;
@@ -82,9 +82,11 @@ static const CGFloat iPadLandscapeYPadding = 30;
 -(void)savePages;
 -(void)saveToUserDefaults:(id)object key:(NSString *)key;
 -(UIDeviceOrientation)currentLayoutOrientation;
+
 @property (nonatomic, retain) NSTimer *itemHoldTimer;
 @property (nonatomic, retain) NSTimer *movePagesTimer;
 @property (nonatomic, retain) MyLauncherItem *draggingItem;
+
 @end
 
 @implementation MyLauncherView
@@ -168,7 +170,6 @@ static const CGFloat iPadLandscapeYPadding = 30;
         _pages = [pages retain];
         itemsAdded = NO;
         navigationalHeight = 45;
-        [self layoutLauncher];
     }
 }
 
@@ -789,7 +790,8 @@ static const CGFloat iPadLandscapeYPadding = 30;
 			[itemToSave setObject:[NSString stringWithFormat:@"%d", [item deletable]] forKey:@"deletable"];
 			[itemToSave setObject:item.controllerStr forKey:@"controller"];
             [itemToSave setObject:item.controllerTitle forKey:@"controllerTitle"];
-            [itemToSave setObject:[NSNumber numberWithInt:2] forKey:@"myLauncherViewItemVersion"];
+            [itemToSave setObject:item.badge forKey:@"badge"];
+            [itemToSave setObject:[NSNumber numberWithInt:3] forKey:@"myLauncherViewItemVersion"];
 			
 			[pageToSave addObject:itemToSave];
 			[itemToSave release];

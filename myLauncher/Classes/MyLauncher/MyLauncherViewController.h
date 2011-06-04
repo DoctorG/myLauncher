@@ -18,6 +18,12 @@
 //  limitations under the License.
 //
 
+typedef enum {
+    ItemTypeTitle    = 0,
+    ItemTypeBadge    = 1,
+    ItemTypeIcon     = 2,
+} ItemType;
+
 #import <UIKit/UIKit.h>
 #import "MyLauncherView.h"
 #import "MyLauncherItem.h"
@@ -31,5 +37,6 @@
 
 -(BOOL)hasSavedLauncherItems;
 -(void)clearSavedLauncherItems;
+-(void)updateItemWithTitle:(NSString *)currentTitle itemTypeToChange:(ItemType)_itemTypeToChange newItem:(NSString *)newItem;
 
 @end

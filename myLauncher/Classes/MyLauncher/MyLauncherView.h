@@ -55,6 +55,7 @@
 @property (nonatomic, retain) MyLauncherPageControl *pageControl;
 @property (nonatomic, retain) NSMutableArray *pages;
 
+-(void)setPages:(NSMutableArray *)pages;
 -(void)setPages:(NSMutableArray *)pages numberOfImmovableItems:(NSInteger)items;
 -(void)viewDidAppear:(BOOL)animated;
 -(void)setCurrentOrientation:(UIInterfaceOrientation)newOrientation;

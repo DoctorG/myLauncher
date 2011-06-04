@@ -36,51 +36,58 @@
 	//[[self appControllers] setObject:[MyCustomViewController class] forKey:@"MyCustomViewController"];
 	//[[self appControllers] setObject:[MyOtherCustomViewController class] forKey:@"MyOtherCustomViewController"];
 	
-	if(![self hasSavedLauncherItems])
+	if(YES) //![self hasSavedLauncherItems])
 	{
 		[self.launcherView setPages:[NSMutableArray arrayWithObjects: 
                                      [NSMutableArray arrayWithObjects: 
-                                      [[[MyLauncherItem alloc] initWithTitle:@"Item 1 Icon"
+                                      [[[MyLauncherItem alloc] initWithTitle:@"Item 1"
                                                                  iPhoneImage:@"itemImage" 
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 1 View"
+                                                                       badge:@""
                                                                    deletable:NO] autorelease],
                                       [[[MyLauncherItem alloc] initWithTitle:@"Item 2"
                                                                  iPhoneImage:@"itemImage" 
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 2 View" 
+                                                                       badge:@""
                                                                    deletable:NO] autorelease],
                                       [[[MyLauncherItem alloc] initWithTitle:@"Item 3"
                                                                  iPhoneImage:@"itemImage" 
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 3 View"
+                                                                       badge:@""
                                                                    deletable:YES] autorelease],
                                       [[[MyLauncherItem alloc] initWithTitle:@"Item 4"
                                                                  iPhoneImage:@"itemImage" 
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 4 View"
+                                                                       badge:@""
                                                                    deletable:NO] autorelease],
                                       [[[MyLauncherItem alloc] initWithTitle:@"Item 5"
                                                                  iPhoneImage:@"itemImage" 
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 5 View"
+                                                                       badge:@""
                                                                    deletable:YES] autorelease],
                                       [[[MyLauncherItem alloc] initWithTitle:@"Item 6"
                                                                  iPhoneImage:@"itemImage" 
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 6 View"
+                                                                       badge:@""
                                                                    deletable:NO] autorelease],
                                       [[[MyLauncherItem alloc] initWithTitle:@"Item 7"
                                                                  iPhoneImage:@"itemImage" 
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 7 View"
+                                                                       badge:@""
                                                                    deletable:NO] autorelease],
                                       nil], 
                                      [NSMutableArray arrayWithObjects: 
@@ -89,18 +96,21 @@
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 8 View"
+                                                                       badge:@""
                                                                    deletable:NO] autorelease],
                                       [[[MyLauncherItem alloc] initWithTitle:@"Item 9"
                                                                  iPhoneImage:@"itemImage" 
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 9 View"
+                                                                       badge:@""
                                                                    deletable:YES] autorelease],
                                       [[[MyLauncherItem alloc] initWithTitle:@"Item 10"
                                                                  iPhoneImage:@"itemImage" 
                                                                    iPadImage:@"itemImage-iPad"
                                                                       target:@"ItemViewController" 
                                                                  targetTitle:@"Item 10 View"
+                                                                       badge:@""
                                                                    deletable:NO] autorelease],
                                       nil],
                                      nil]];
@@ -108,7 +118,7 @@
         // Set number of immovable items below; only set it when you are setting the pages as the 
         // user may still be able to delete these items and setting this then will cause movable 
         // items to become immovable.
-        // [self.launcherView setNumberOfImmovableItems:1];
+        //[self.launcherView setNumberOfImmovableItems:1];
         
         // Or uncomment the line below to disable editing (moving/deleting) completely!
         // [self.launcherView setEditingAllowed:NO];
